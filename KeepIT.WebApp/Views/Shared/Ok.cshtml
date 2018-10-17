@@ -1,0 +1,38 @@
+﻿@using KeepIT.WebApp.ViewModels
+@model OkViewModel
+
+@{
+    Layout = "~/Views/Shared/_FooterFixedLayout.cshtml";
+    ViewBag.Title = Model.Title;
+} 
+@{ string js = string.Empty;
+    if (Model.IsRedirecting)
+    {
+        js = "setTimeout(function () { window.location = '" + Model.RedirectingUrl + "'; }, " + Model.RedirectingTimeout + ");";
+    }
+    }
+<script type="text/javascript">
+    $(function () {
+        @Html.Raw(js);
+    });
+</script>
+<div class="container">
+    <div class="card card-container">
+        <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading"><span class="fas fa-check"></span> @Model.Title</h4>
+            <p></p>
+            <hr>
+            <p class="mb-0">
+                @foreach (string msg in Model.Items)
+                {
+                    @msg<br />
+                }
+            </p>
+        </div>
+        <p id="profile-name" class="profile-name-card">@Model.Header</p>
+
+    </div><!-- /card-container -->
+</div><!-- /container -->
